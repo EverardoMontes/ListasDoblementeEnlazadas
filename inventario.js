@@ -14,11 +14,21 @@ class Inventario{
             nuevoProducto.anterior = this.ultimo;
             this.ultimo = nuevoProducto;
         }
+        if(nuevoProducto.codigo== 1){
+            nuevoProducto.siguiente= this.primero;
+            this.primero.anterior = nuevoProducto;
+            this.primero = nuevoProducto;
+        }
         let aux = this.primero;
-        while(aux.siguiente!=null){
-            if(aux.siguiente.codigo<nuevoProducto.codigo){
-                if(aux.codigo>=nuevoProducto.codigo){
+        if(nuevoProducto.codigo>1 && nuevoProducto.codigo< this.ultimo.codigo){
+            console.log('entra al if');
+            while(aux.siguiente!= null){
+                console.log('entró al while')
+                if(nuevoProducto.codigo>=aux.codigo && nuevoProducto.codigo<aux.siguiente.codigo){
+                    console.log('entró al segundo if');
                     nuevoProducto.siguiente = aux.siguiente;
+                    aux.siguiente.anterior = nuevoProducto;
+                    nuevoProducto.anterior = aux;
                     aux.siguiente = nuevoProducto;
                     return;
                 }
@@ -54,6 +64,7 @@ class Inventario{
     listado(){ //LISTA ENLAZADA LISTO
         let res="";
       let aux=this.primero;
+      let auxUltimo= this.ultimo;
       while (aux!=null){
 	      res += aux.datos() + " " + "<br>";
   	    aux=aux.siguiente;
