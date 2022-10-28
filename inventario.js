@@ -51,6 +51,7 @@ class Inventario{
             while(aux != null){
                 if(aux.siguiente.codigo == codigo){
                     aux.siguiente = aux.siguiente.siguiente;
+                    aux.siguiente.siguiente.anterior = aux.siguiente;
                     
                     return;
                 }
